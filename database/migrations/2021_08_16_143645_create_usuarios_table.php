@@ -24,7 +24,6 @@ class CreateUsuariosTable extends Migration
             $table->string('direccion');
             $table->unsignedTinyInteger('estado')->default(0);
 
-            $table->unsignedTinyInteger('eliminado')->default(0);
             $table->timestamps();
         });
     }

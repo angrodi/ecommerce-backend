@@ -12,8 +12,9 @@ class ProveedorController extends Controller
         $proveedores = Proveedor::all();
 
         return response()->json([
-            'data'  => $proveedores,
-            'total' => count($proveedores)
+            'data'   => $proveedores,
+            'total'  => count($proveedores),
+            'status' => 200
         ], Response::HTTP_OK);
     }
 
@@ -21,7 +22,8 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::findOrFail($id);
 
         return response()->json([
-            'data' => $proveedor
+            'data'   => $proveedor,
+            'status' => 200
         ], Response::HTTP_OK);
     }
 
@@ -33,7 +35,8 @@ class ProveedorController extends Controller
 
         if ($proveedor->save()) {
             return response()->json([
-                'message' => 'Proveedor creado exitosamente'
+                'message' => 'Proveedor creado exitosamente',
+                'status'  => 201
             ], Response::HTTP_CREATED);
         }
     }
@@ -44,13 +47,10 @@ class ProveedorController extends Controller
         $proveedor->direccion = $request->direccion;
         $proveedor->telefono  = $request->telefono;
 
-        if ($request->eliminado) {
-            $proveedor->eliminado = $request->eliminado;
-        }
-
         if ($proveedor->save()) {
             return response()->json([
-                'message' => 'Proveedor actualizado exitosamente'
+                'message' => 'Proveedor actualizado exitosamente',
+                'status'  => 200
             ], Response::HTTP_OK);
         }
     }
@@ -60,7 +60,8 @@ class ProveedorController extends Controller
 
         if ($proveedor->delete()) {
             return response()->json([
-                'message' => 'Proveedor eliminado exitosamente'
+                'message' => 'Proveedor eliminado exitosamente',
+                'status'  => 200
             ], Response::HTTP_OK);
         }
     }

@@ -94,6 +94,10 @@ $app->routeMiddleware([
     'auth.role' => App\Http\Middleware\RoleAuthorization::class,
 ]);
 
+$app->middleware([
+    App\Http\Middleware\CORS::class, // cors middleware
+]);
+
 
 /*
 |--------------------------------------------------------------------------

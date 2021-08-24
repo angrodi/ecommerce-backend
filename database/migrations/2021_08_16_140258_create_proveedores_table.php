@@ -18,8 +18,7 @@ class CreateProveedoresTable extends Migration
             $table->string('nombre');
             $table->string('direccion');
             $table->string('telefono');
-            
-            $table->unsignedTinyInteger('eliminado')->default(0);
+
             $table->timestamps();
         });
     }

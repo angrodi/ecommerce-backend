@@ -74,7 +74,6 @@ class CompraController extends Controller
 
     public function update(Request $request, $id) {
         $compra = Compra::findOrFail($id);
-        $compra->monto       = $request->monto;
         $compra->fecha       = $request->fecha;
         $compra->proveedorId = $request->proveedorId;
 

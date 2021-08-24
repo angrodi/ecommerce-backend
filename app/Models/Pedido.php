@@ -17,6 +17,7 @@ class Pedido extends Model
     protected $hidden = [
         'empleado_id',
         'cliente_id',
+        'metodo_pago',
         'fecha_creacion',
         'fecha_entrega',
         'created_at', 

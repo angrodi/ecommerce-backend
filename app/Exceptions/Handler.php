@@ -54,13 +54,15 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof PDOException) {
             return response()->json([
-                'error' => $exception->getMessage()
+                'error'  => $exception->getMessage(),
+                'status' => 500
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         if ($exception instanceof ModelNotFoundException) {
             return response()->json([
-                'error' => $exception->getMessage()
+                'error'  => $exception->getMessage(),
+                'status' => 404
             ], Response::HTTP_NOT_FOUND);
         }
 

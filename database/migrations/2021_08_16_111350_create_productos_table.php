@@ -28,7 +28,6 @@ class CreateProductosTable extends Migration
                   ->onDelete('set null')
                   ->onUpdate('cascade');
 
-            $table->unsignedTinyInteger('eliminado')->default(0);
             $table->timestamps();
         });
     }

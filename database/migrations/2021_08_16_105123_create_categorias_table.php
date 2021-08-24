@@ -18,8 +18,7 @@ class CreateCategoriasTable extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->unsignedTinyInteger('estado')->default(0);
-            
-            $table->unsignedTinyInteger('eliminado')->default(0);
+
             $table->timestamps();
         });
     }

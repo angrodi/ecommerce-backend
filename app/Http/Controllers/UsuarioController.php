@@ -38,10 +38,6 @@ class UsuarioController extends Controller
         $usuario->direccion = $request->direccion;
         $usuario->estado    = $request->estado;
 
-        if ($request->eliminado) {
-            $usuario->eliminado = $request->eliminado;
-        }
-
         DB::beginTransaction();
 
         try {

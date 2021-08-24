@@ -22,7 +22,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('/login', 'AuthController@login');
     $router->post('/registro', 'AuthController@registro');
     
-    $router->group(['middleware' => 'auth'], function () use ($router) {
+    // $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/logout', 'AuthController@logout');
         $router->post('/refresh', 'AuthController@refresh');
 
@@ -35,7 +35,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('/productos', 'ProductoController@find');
         $router->get('/productos/{id}', 'ProductoController@findById');
         $router->post('/productos', 'ProductoController@create');
-        $router->put('/productos/{id}', 'ProductoController@update');
+        $router->post('/productos/{id}', 'ProductoController@update');
         $router->delete('/productos/{id}', 'ProductoController@delete');
     
         $router->get('/proveedores', 'ProveedorController@find');
@@ -66,6 +66,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('/pedidos', 'PedidoController@create');
         $router->put('/pedidos/{id}', 'PedidoController@update');
         $router->delete('/pedidos/{id}', 'PedidoController@delete');
-    });
+    // });
 
 });
