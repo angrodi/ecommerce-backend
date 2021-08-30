@@ -15,17 +15,19 @@ class CompraController extends Controller
         $compras = Compra::all();
 
         return response()->json([
-            'data'  => $compras,
-            'total' => count($compras) 
+            'data'   => $compras,
+            'status' => 200,
+            'total'  => count($compras)
         ], Response::HTTP_OK);
     }
 
     public function findById($id) {
         // $compra = Compra::findOrFail($id);
-        $compra = Compra::with('detalles')->findOrFail($id);
+        $compra = Compra::with(['proveedor', 'detalles.producto'])->findOrFail($id);
 
         return response()->json([
-            'data' => $compra
+            'data'   => $compra,
+            'status' => 200
         ], Response::HTTP_OK);
     }
 
@@ -63,7 +65,8 @@ class CompraController extends Controller
             DB::commit();
 
             return response()->json([
-                'message' => 'Compra creada exitosamente'
+                'message' => 'Compra creada exitosamente',
+                'status'  => 201
             ], Response::HTTP_CREATED);
 
         } catch (\Exception $e) {
@@ -79,7 +82,8 @@ class CompraController extends Controller
 
         if ($compra->save()) {
             return response()->json([
-                'message' => 'Compra actualizada exitosamente'
+                'message' => 'Compra actualizada exitosamente',
+                'status'  => 200
             ], Response::HTTP_OK);
         }
     }
@@ -106,8 +110,9 @@ class CompraController extends Controller
             DB::commit();
 
             return response()->json([
-                'message' => 'Compra eliminada exitosamente'
-            ], Response::HTTP_CREATED);
+                'message' => 'Compra eliminada exitosamente',
+                'status'  => 200
+            ], Response::HTTP_OK);
 
         } catch (\Exception $e) {
             DB::rollBack();

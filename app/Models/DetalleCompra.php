@@ -14,6 +14,7 @@ class DetalleCompra extends Model
     ];
 
     protected $hidden = [
+        'compraId',
         'compra_id',
         'producto_id',
         'created_at', 

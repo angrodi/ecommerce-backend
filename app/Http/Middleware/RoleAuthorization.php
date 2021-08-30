@@ -49,7 +49,8 @@ class RoleAuthorization
 
     private function unauthorized($message = null) {
         return response()->json([
-            'message' => $message ? $message : 'No autorizado'
+            'message' => $message ? $message : 'No autorizado',
+            'status'  => 401
         ], Response::HTTP_UNAUTHORIZED);
     }
 

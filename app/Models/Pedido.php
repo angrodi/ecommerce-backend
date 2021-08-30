@@ -75,7 +75,7 @@ class Pedido extends Model
 
     // Relaciones
     public function cliente() {
-        return $this->belongsTo('App\Models\Usuario');
+        return $this->belongsTo('App\Models\Cliente');
     }
 
     public function empleado() {

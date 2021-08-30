@@ -15,6 +15,7 @@ class Usuario extends Model implements AuthenticatableContract, AuthorizableCont
     use Authenticatable, Authorizable, HasFactory;
 
     protected $hidden = [
+        'password',
         'created_at', 
         'updated_at', 
         'pivot'
@@ -37,7 +38,10 @@ class Usuario extends Model implements AuthenticatableContract, AuthorizableCont
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'nombre' => $this->nombres.' '.$this->apellidos,
+            'roles'  => $this->roles()->get()
+        ];
     }
 
     // Relaciones

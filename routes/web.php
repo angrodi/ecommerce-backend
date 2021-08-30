@@ -19,12 +19,11 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function () use ($router) {
 
-    $router->post('/login', 'AuthController@login');
-    $router->post('/registro', 'AuthController@registro');
+    $router->post('/auth/login', 'AuthController@login');
     
-    // $router->group(['middleware' => 'auth'], function () use ($router) {
-        $router->post('/logout', 'AuthController@logout');
-        $router->post('/refresh', 'AuthController@refresh');
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->post('/auth/logout', 'AuthController@logout');
+        $router->post('/auth/refresh', 'AuthController@refresh');
 
         $router->get('/categorias', 'CategoriaController@find');
         $router->get('/categorias/{id}', 'CategoriaController@findById');
@@ -58,14 +57,22 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     
         $router->get('/usuarios', 'UsuarioController@find');
         $router->get('/usuarios/{id}', 'UsuarioController@findById');
+        $router->post('/usuarios', 'UsuarioController@create');
         $router->put('/usuarios/{id}', 'UsuarioController@update');
         $router->delete('/usuarios/{id}', 'UsuarioController@delete');
+
+        $router->get('/clientes', 'ClienteController@find');
+        $router->get('/clientes/{id}', 'ClienteController@findById');
+        $router->post('/clientes', 'ClienteController@create');
+        $router->put('/clientes/{id}', 'ClienteController@update');
+        $router->delete('/clientes/{id}', 'ClienteController@delete');
     
         $router->get('/pedidos', 'PedidoController@find');
         $router->get('/pedidos/{id}', 'PedidoController@findById');
         $router->post('/pedidos', 'PedidoController@create');
         $router->put('/pedidos/{id}', 'PedidoController@update');
+        $router->patch('/pedidos/{id}', 'PedidoController@updatePatch');
         $router->delete('/pedidos/{id}', 'PedidoController@delete');
-    // });
+    });
 
 });

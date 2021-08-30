@@ -30,7 +30,7 @@ class CreatePedidosTable extends Migration
 
             $table->unsignedBigInteger('cliente_id')->nullable();
             $table->foreign('cliente_id')
-                  ->references('id')->on('usuarios')
+                  ->references('id')->on('clientes')
                   ->onDelete('set null')
                   ->onUpdate('cascade');
 

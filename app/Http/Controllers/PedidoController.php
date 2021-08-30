@@ -15,17 +15,20 @@ class PedidoController extends Controller
         $pedidos = Pedido::all();
 
         return response()->json([
-            'data'  => $pedidos,
-            'total' => count($pedidos) 
+            'data'   => $pedidos,
+            'status' => 200,
+            'total'  => count($pedidos) 
         ], Response::HTTP_OK);
     }
 
     public function findById($id) {
         // $pedido = Pedido::findOrFail($id);
-        $pedido = Pedido::with('detalles')->findOrFail($id);
+        // $pedido = Pedido::with('detalles')->findOrFail($id);
+        $pedido = Pedido::with(['cliente', 'detalles.producto'])->findOrFail($id);
 
         return response()->json([
-            'data' => $pedido
+            'data'   => $pedido,
+            'status' => 201
         ], Response::HTTP_OK);
     }
 
@@ -69,7 +72,8 @@ class PedidoController extends Controller
             DB::commit();
 
             return response()->json([
-                'message' => 'Pedido creado exitosamente'
+                'message' => 'Pedido creado exitosamente',
+                'status'  => 201
             ], Response::HTTP_CREATED);
 
         } catch (\Exception $e) {
@@ -93,7 +97,23 @@ class PedidoController extends Controller
 
         if ($pedido->save()) {
             return response()->json([
-                'message' => 'Pedido actualizada exitosamente'
+                'message' => 'Pedido actualizada exitosamente',
+                'status'  => 200
+            ], Response::HTTP_OK);
+        }
+    }
+
+    public function updatePatch(Request $request, $id) {
+        $pedido = Pedido::findOrFail($id);
+
+        if ($request->estado) {
+            $pedido->estado = $request->estado;
+        }
+
+        if ($pedido->save()) {
+            return response()->json([
+                'message' => 'Pedido actualizada exitosamente',
+                'status'  => 200
             ], Response::HTTP_OK);
         }
     }
@@ -120,8 +140,9 @@ class PedidoController extends Controller
             DB::commit();
 
             return response()->json([
-                'message' => 'Pedido eliminado exitosamente'
-            ], Response::HTTP_CREATED);
+                'message' => 'Pedido eliminado exitosamente',
+                'status'  => 200
+            ], Response::HTTP_OK);
 
         } catch (\Exception $e) {
             DB::rollBack();

@@ -12,8 +12,9 @@ class RolController extends Controller
         $roles = Rol::all();
 
         return response()->json([
-            'data'  => $roles,
-            'total' => count($roles)
+            'data'   => $roles,
+            'status' => 200,
+            'total'  => count($roles)
         ], Response::HTTP_OK);
     }
 
@@ -21,7 +22,8 @@ class RolController extends Controller
         $rol = Rol::findOrFail($id);
 
         return response()->json([
-            'data' => $rol
+            'data'   => $rol,
+            'status' => 200
         ], Response::HTTP_OK);
     }
 
@@ -31,7 +33,8 @@ class RolController extends Controller
 
         if ($rol->save()) {
             return response()->json([
-                'message' => 'Rol creado exitosamente'
+                'message' => 'Rol creado exitosamente',
+                'status'  => 201
             ], Response::HTTP_CREATED);
         }
     }
@@ -42,7 +45,8 @@ class RolController extends Controller
 
         if ($rol->save()) {
             return response()->json([
-                'message' => 'Rol actualizado exitosamente'
+                'message' => 'Rol actualizado exitosamente',
+                'status'  => 200
             ], Response::HTTP_OK);
         }
     }
@@ -52,7 +56,8 @@ class RolController extends Controller
 
         if ($rol->delete()) {
             return response()->json([
-                'message' => 'Rol eliminado exitosamente'
+                'message' => 'Rol eliminado exitosamente',
+                'status'  => 200
             ], Response::HTTP_OK);
         }
     }
