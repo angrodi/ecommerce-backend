@@ -28,7 +28,7 @@ class PedidoController extends Controller
 
         return response()->json([
             'data'   => $pedido,
-            'status' => 201
+            'status' => 200
         ], Response::HTTP_OK);
     }
 
@@ -55,16 +55,16 @@ class PedidoController extends Controller
             
             // Guardar los detalles de la pedido
             foreach ($detalles as $detalle) {
-                $detalleCompra = new DetallePedido();
-                $detalleCompra->cantidad   = $detalle["cantidad"];
-                $detalleCompra->productoId = $detalle["productoId"];
-                $detalleCompra->pedidoId   = $pedido->id;
+                $detallePedido = new DetallePedido();
+                $detallePedido->cantidad   = $detalle["cantidad"];
+                $detallePedido->productoId = $detalle["productoId"];
+                $detallePedido->pedidoId   = $pedido->id;
 
-                $detalleCompra->save();
+                $detallePedido->save();
                 
                 // Actualizar stock del producto
-                $producto = Producto::findOrFail($detalleCompra->productoId);
-                $producto->stock = $producto->stock - $detalleCompra->cantidad;
+                $producto = Producto::findOrFail($detallePedido->productoId);
+                $producto->stock = $producto->stock - $detallePedido->cantidad;
                 
                 $producto->save();
             }
@@ -103,7 +103,7 @@ class PedidoController extends Controller
         }
     }
 
-    public function updatePatch(Request $request, $id) {
+    public function updatePatch(Request $request, $id) { // Metodo PATCH
         $pedido = Pedido::findOrFail($id);
 
         if ($request->estado) {

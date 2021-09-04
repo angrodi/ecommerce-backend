@@ -20,10 +20,10 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->post('/auth/login', 'AuthController@login');
+    $router->post('/auth/refresh', 'AuthController@refresh');
     
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/auth/logout', 'AuthController@logout');
-        $router->post('/auth/refresh', 'AuthController@refresh');
 
         $router->get('/categorias', 'CategoriaController@find');
         $router->get('/categorias/{id}', 'CategoriaController@findById');

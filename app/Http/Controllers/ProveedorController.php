@@ -32,6 +32,7 @@ class ProveedorController extends Controller
         $proveedor->nombre    = $request->nombre;
         $proveedor->direccion = $request->direccion;
         $proveedor->telefono  = $request->telefono;
+        $proveedor->ruc       = $request->ruc;
 
         if ($proveedor->save()) {
             return response()->json([
@@ -46,6 +47,7 @@ class ProveedorController extends Controller
         $proveedor->nombre    = $request->nombre;
         $proveedor->direccion = $request->direccion;
         $proveedor->telefono  = $request->telefono;
+        $proveedor->ruc       = $request->ruc;
 
         if ($proveedor->save()) {
             return response()->json([
