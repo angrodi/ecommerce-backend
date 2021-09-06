@@ -17,7 +17,6 @@ class CreatePedidosTable extends Migration
             $table->id();
             $table->string('direccion');
             $table->decimal('monto', 7, 2);
-            $table->dateTime('fecha_creacion')->nullable();
             $table->dateTime('fecha_entrega')->nullable();
             $table->string('metodo_pago');
             $table->string('estado');

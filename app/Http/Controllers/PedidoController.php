@@ -40,7 +40,6 @@ class PedidoController extends Controller
             $pedido = new Pedido();
             $pedido->direccion     = $request->direccion;
             $pedido->monto         = $request->monto;
-            $pedido->fechaCreacion = $request->fechaCreacion;
             $pedido->metodoPago    = $request->metodoPago;
             $pedido->clienteId     = $request->clienteId;
             $pedido->estado        = $request->estado;
@@ -86,7 +85,6 @@ class PedidoController extends Controller
         $pedido = Pedido::findOrFail($id);
         $pedido->direccion     = $request->direccion;
         $pedido->monto         = $request->monto;
-        $pedido->fechaCreacion = $request->fechaCreacion;
         $pedido->metodoPago    = $request->metodoPago;
         $pedido->clienteId     = $request->clienteId;
         $pedido->estado        = $request->estado;

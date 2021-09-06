@@ -21,17 +21,20 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->post('/auth/login', 'AuthController@login');
     $router->post('/auth/refresh', 'AuthController@refresh');
+
+    $router->get('/categorias', 'CategoriaController@find');
+    $router->get('/productos', 'ProductoController@find');
     
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/auth/logout', 'AuthController@logout');
 
-        $router->get('/categorias', 'CategoriaController@find');
+        // $router->get('/categorias', 'CategoriaController@find');
         $router->get('/categorias/{id}', 'CategoriaController@findById');
         $router->post('/categorias', 'CategoriaController@create');
         $router->put('/categorias/{id}', 'CategoriaController@update');
         $router->delete('/categorias/{id}', 'CategoriaController@delete');
     
-        $router->get('/productos', 'ProductoController@find');
+        // $router->get('/productos', 'ProductoController@find');
         $router->get('/productos/{id}', 'ProductoController@findById');
         $router->post('/productos', 'ProductoController@create');
         $router->post('/productos/{id}', 'ProductoController@update');

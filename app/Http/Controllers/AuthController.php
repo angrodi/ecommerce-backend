@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {   
     public function login(Request $request) {
-        // validate incoming request 
+        // Validar datos de entrada
         $this->validate($request, [
             'email'    => 'required|string',
             'password' => 'required|string',
@@ -18,10 +20,18 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
+        // Validar si es un usuario desactivado
+        if ( Auth::validate(array_merge($credentials, ['estado' => 0])) ) {
+            return response()->json([
+                'error'  => 'Usuario desactivado',
+                'status' => 401 
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
         if (! $token = Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Datos incorrectos',
-                'status'  => 401 
+                'error'  => 'Datos incorrectos',
+                'status' => 401 
             ], Response::HTTP_UNAUTHORIZED);
         }
 

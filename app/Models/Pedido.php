@@ -11,15 +11,13 @@ class Pedido extends Model
         'clienteId',
         'metodoPago',
         'fechaCreacion',
-        'fechaEntrega'
+        'fechaActualizacion'
     ];
 
     protected $hidden = [
         'empleado_id',
         'cliente_id',
         'metodo_pago',
-        'fecha_creacion',
-        'fecha_entrega',
         'created_at', 
         'updated_at'
     ];
@@ -50,19 +48,19 @@ class Pedido extends Model
     }
 
     public function getFechaCreacionAttribute() {
-        return $this->attributes['fecha_creacion'];
+        return $this->attributes['created_at'];
     }
 
     public function setFechaCreacionAttribute($value) {
-        $this->attributes['fecha_creacion'] = $value;
+        $this->attributes['created_at'] = $value;
     }
 
-    public function getFechaEntregaAttribute() {
-        return $this->attributes['fecha_entrega'];
+    public function getFechaActualizacionAttribute() {
+        return $this->attributes['updated_at'];
     }
 
-    public function setFechaEntregaAttribute($value) {
-        $this->attributes['fecha_entrega'] = $value;
+    public function setFechaActualizacionAttribute($value) {
+        $this->attributes['updated_at'] = $value;
     }
  
     public function getMontoAttribute() {
