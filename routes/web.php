@@ -25,7 +25,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/categorias', 'CategoriaController@find');
     $router->get('/productos', 'ProductoController@find');
     
-    $router->group(['middleware' => 'auth'], function () use ($router) {
+    // $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->post('/auth/logout', 'AuthController@logout');
 
         // $router->get('/categorias', 'CategoriaController@find');
@@ -76,6 +76,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('/pedidos/{id}', 'PedidoController@update');
         $router->patch('/pedidos/{id}', 'PedidoController@updatePatch');
         $router->delete('/pedidos/{id}', 'PedidoController@delete');
-    });
+    // });
 
 });
